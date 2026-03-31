@@ -1,0 +1,28 @@
+services:
+  claude-web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - AUTH_TOKEN=${AUTH_TOKEN:-}
+      - MAX_SESSIONS=${MAX_SESSIONS:-5}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-}
+    volumes:
+      # Persist Claude's config and session data across restarts
+      - claude-data:/home/claude/.claude
+    tmpfs:
+      # PTY processes write temp files here; no persistent storage needed
+      - /tmp:mode=1777
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  claude-data:

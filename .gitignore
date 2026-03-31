@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+build/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Prompts
+prompts/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+*.swp
+*.swo
+*~
+.vscode/settings.json
+.vscode/launch.json
+
+# Debug & logs
+*.log
+debug-logs/
+coverage/
+
+# Bun
+bun.lockb
+
+# MCP registry tokens
+.mcpregistry_*
+
+# Temporary files
+tmp/
+temp/
+
+
